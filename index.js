@@ -32,7 +32,8 @@ app.post('/sendMessage', async (req, res) => {
         let info = await transporter.sendMail({
 
             from: 'Name',
-            to: email,
+            // to: email,
+            to: 'knuckostya@gmail.com',
             subject: "HR from portfolio",
 
 
