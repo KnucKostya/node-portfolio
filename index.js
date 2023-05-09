@@ -43,9 +43,6 @@ app.post('/sendMessage', async (req, res) => {
                <div>${text}</div>`,
     });
 
-    res.set('Content-Type', 'text/html');
-    res.send('<div>Hello</div>')
-
     res.send(req.body)
 })
 
