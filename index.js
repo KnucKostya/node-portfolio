@@ -16,34 +16,40 @@ app.get('/sendMessage', async (req, res) => {
 })
 
 app.post('/sendMessage', async (req, res) => {
+    try{
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            secure: true,
+            auth: {
+                user: 'knuckostya@gmail.com',
+                pass: 'micutgnuyrttjunn',
 
-    let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        secure: true,
-        auth: {
-            user: 'knuckostya@gmail.com',
-            pass: 'micutgnuyrttjunn',
+            },
+        });
 
-        },
-    });
+        let {email, name, text} = req.body
 
-    let {email, name, text} = req.body
-
-    let info = await transporter.sendMail({
-        // from: email,
-        // to: "knuckostya@gmail.com",
-        // subject: "HR from portfolio",
-        from: 'Name',
-        to: email,
-        subject: "HR from portfolio",
+        let info = await transporter.sendMail({
+            // from: email,
+            // to: "knuckostya@gmail.com",
+            // subject: "HR from portfolio",
+            from: 'Name',
+            to: email,
+            subject: "HR from portfolio",
 
 
-        html: `<b>Сообщение от HR, ${name} с PORTFOLIO</b>
+            html: `<b>Сообщение от HR, ${name} с PORTFOLIO</b>
                <div>${email}</div>
                <div>${text}</div>`,
-    });
+        });
 
-    res.send(req.body)
+        res.send(req.body)
+    }
+    catch{
+        res.send(400)
+    }
+
+
 })
 
 app.listen(port, () => {
